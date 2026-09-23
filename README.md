@@ -1,25 +1,16 @@
 # QuantaHub Ruleset
 
-QuantaHub Ruleset is the canonical architecture, security, engineering, agent-orchestration and verification policy pack for the QuantaHub cyber-range platform.
+Canonical architecture, security, engineering, Cursor-agent orchestration and verification policy for the QuantaHub cyber-range platform.
 
-## Purpose
+Current policy version: **0.2.0**
 
-QuantaHub is built on CTFd as a reusable platform shell while its cyber-range capabilities remain separate, isolated and replaceable. This repository exists so Cursor agents do not rediscover architecture decisions from chat history or improvise incompatible implementations.
-
-The repository is designed to be installable as a Cursor Plugin. The plugin bundles:
-
-- always-applied project rules,
-- specialized subagent definitions,
-- policy hooks,
-- architecture and security guidance.
-
-## Non-negotiable architectural idea
+## Architecture
 
 ```text
-CTFd / Platform Plane
+CTFd / Platform Core
         |
         v
-Custom QuantaHub Layer
+QuantaHub Platform Layer
         |
         v
 Lab Orchestrator
@@ -28,24 +19,50 @@ Lab Orchestrator
 Runner / Sandbox Plane
 ```
 
-CTFd is reused for platform capabilities where useful. It is not trusted as the lab-isolation boundary and must not directly own runner/container privileges.
+Vulnerable lab execution is a separate trust domain and uses a separate registrable web domain from platform/authentication origins.
 
-## Cursor installation model
+## Cursor model
 
-The intended model is to import this repository as a Cursor plugin. A second supported model is to vendor/sync the `plugin/rules` files into a project's `.cursor/rules/` directory.
+The normal Cursor main Agent is the **Master/Orchestrator**.
 
-Once installed, files with `alwaysApply: true` are included in Agent context automatically. The policy pack deliberately splits rules by concern instead of using one enormous prompt.
+Five specialist subagents:
+- `quanta-platform`
+- `quanta-lab-engine`
+- `quanta-security`
+- `quanta-frontend`
+- `quanta-verifier`
 
-See `docs/CURSOR_INTEGRATION.md` for installation and enforcement guidance.
+The plugin bundles:
+- constitutional always-applied rules,
+- contextual specialist rules,
+- five specialist subagents,
+- fail-closed high-risk shell hooks,
+- machine-readable Lab Manifest schema.
 
-## Source of truth
+## Machine enforcement
 
-- `docs/DECISIONS.md`: architectural decisions already agreed.
-- `docs/SYSTEM_ARCHITECTURE.md`: system topology and boundaries.
-- `docs/SECURITY_MODEL.md`: cyber-range threat model and controls.
-- `docs/AGENT_ORCHESTRATION.md`: master + specialist agent model.
-- `plugin/rules/*.mdc`: machine-consumable Cursor rules.
-- `plugin/agents/*.md`: custom subagent definitions.
-- `plugin/hooks/`: policy activation/audit hooks.
+- `schemas/lab-manifest.schema.json` validates published lab manifests.
+- `plugin/hooks/policy-guard.py` blocks selected high-confidence unsafe runtime commands.
+- `.github/workflows/policy-ci.yml` validates policy structure and hook syntax.
+- Security/runtime/application controls remain authoritative; AI rules are not a substitute for technical isolation.
 
-Do not treat chat transcripts as canonical project state. Update this repository when a durable decision changes.
+## Canonical documents
+
+- `docs/DECISIONS.md`
+- `docs/SYSTEM_ARCHITECTURE.md`
+- `docs/SECURITY_MODEL.md`
+- `docs/API_CONTRACTS.md`
+- `docs/AUTHORIZATION_MODEL.md`
+- `docs/NETWORK_POLICY.md`
+- `docs/ABUSE_AND_ACCEPTABLE_USE.md`
+- `docs/BACKUP_RECOVERY.md`
+- `docs/RELEASE_POLICY.md`
+- `docs/UPSTREAM_DEPENDENCIES.md`
+- `docs/AGENT_ORCHESTRATION.md`
+- `docs/CURSOR_INTEGRATION.md`
+
+Chat transcripts are not canonical project state. Durable decisions belong in this repository.
+
+## License
+
+Apache-2.0.
