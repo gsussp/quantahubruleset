@@ -1,0 +1,12 @@
+---
+description: Change management, architecture decision and merge discipline.
+alwaysApply: true
+---
+# Change Management
+
+- Keep changes scoped and reviewable.
+- Use branches/worktrees for concurrent agent work where appropriate.
+- Do not mix unrelated refactors into security-critical changes.
+- When an accepted architectural invariant changes, update the decision log and corresponding rule.
+- Prefer backward-compatible migrations and explicit rollback paths for persistent state.
+- Treat generated artifacts and vendored upstream code carefully; do not rewrite upstream sources without a documented reason.
