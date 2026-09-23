@@ -1,23 +1,23 @@
 ---
-description: Master plus specialist Cursor agent delegation model.
+description: Main Agent plus five specialist Cursor subagents delegation model.
 alwaysApply: true
 ---
 # Agent Orchestration
 
-Default team:
-- Master/Orchestrator
-- Platform
-- Lab Engine
-- Security/Infrastructure
-- Frontend/UX
-- Verifier/QA
+The current Cursor main Agent is the QuantaHub Master/Orchestrator. Do not create an extra orchestration subagent layer by default.
 
-The user should normally give work to Master. Master decomposes and delegates.
+Specialist subagents:
+- quanta-platform
+- quanta-lab-engine
+- quanta-security
+- quanta-frontend
+- quanta-verifier
 
 Rules:
-- Delegate by ownership boundary, not by arbitrary file count.
-- Parallelize only independent tasks.
-- Avoid simultaneous edits to the same ownership area unless intentionally coordinated.
-- Security-sensitive work must be reviewed by Security Agent.
-- No implementation task is complete until Verifier supplies appropriate evidence.
+- The user normally gives work to the main Agent; it decomposes and delegates.
+- Delegate by ownership boundary, not arbitrary file count.
+- Use specialist agents proactively when their description matches the work.
+- Parallelize only independent tasks and avoid concurrent edits to the same ownership area.
+- Security-sensitive work must be reviewed by quanta-security.
+- No meaningful implementation is complete until quanta-verifier supplies appropriate evidence.
 - Repository rules/docs are canonical memory; chat history is not.
