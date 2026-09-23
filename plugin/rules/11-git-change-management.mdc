@@ -1,6 +1,6 @@
 ---
-description: Change management, architecture decision and merge discipline.
-alwaysApply: true
+description: Use when changing Git workflow, releases, dependencies, migrations, generated artifacts, upstream CTFd integration or architecture decisions.
+alwaysApply: false
 ---
 # Change Management
 
@@ -10,3 +10,4 @@ alwaysApply: true
 - When an accepted architectural invariant changes, update the decision log and corresponding rule.
 - Prefer backward-compatible migrations and explicit rollback paths for persistent state.
 - Treat generated artifacts and vendored upstream code carefully; do not rewrite upstream sources without a documented reason.
+- Follow the release and upstream dependency policies.
