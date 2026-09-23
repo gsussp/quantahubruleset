@@ -6,27 +6,31 @@ import sys
 try:
     event = json.load(sys.stdin)
 except Exception:
-    event = {}
+    print(json.dumps({
+        "permission": "deny",
+        "user_message": "QuantaHub policy guard could not parse hook input.",
+        "agent_message": "Policy guard parse failure; do not bypass it."
+    }))
+    sys.exit(0)
 
-payload = json.dumps(event, ensure_ascii=False)
-text = payload.lower()
+command = str(event.get("command", ""))
 
 hard_denies = [
-    (r"--privileged\b", "Privileged container execution is forbidden by QuantaHub policy."),
-    (r"--network[= ]host\b", "Host networking is forbidden for lab workloads."),
-    (r"hostnetwork\s*[:=]\s*true", "hostNetwork=true is forbidden for lab workloads."),
-    (r"hostpid\s*[:=]\s*true", "hostPID=true is forbidden for lab workloads."),
-    (r"hostipc\s*[:=]\s*true", "hostIPC=true is forbidden for lab workloads."),
-    (r"/var/run/docker\.sock", "Mounting the Docker socket into workloads is forbidden."),
-    (r"docker\.sock", "Docker socket access is forbidden for lab workloads."),
-    (r"/run/containerd/containerd\.sock", "Container runtime socket access is forbidden."),
+    (r"(^|\s)--privileged(\s|$|=)", "Privileged container execution is forbidden."),
+    (r"(^|\s)--network(?:=|\s+)host(\s|$)", "Host networking is forbidden for lab workloads."),
+    (r"hostNetwork\s*[:=]\s*true", "hostNetwork=true is forbidden for lab workloads."),
+    (r"hostPID\s*[:=]\s*true", "hostPID=true is forbidden for lab workloads."),
+    (r"hostIPC\s*[:=]\s*true", "hostIPC=true is forbidden for lab workloads."),
+    (r"/var/run/docker\.sock", "Docker socket access/mounts are forbidden for lab workloads."),
+    (r"/run/containerd/containerd\.sock", "Container runtime socket access/mounts are forbidden."),
 ]
 
 for pattern, reason in hard_denies:
-    if re.search(pattern, text, re.IGNORECASE):
+    if re.search(pattern, command, re.IGNORECASE):
         print(json.dumps({
             "permission": "deny",
-            "reason": reason
+            "user_message": reason,
+            "agent_message": reason + " Use an isolated runtime/provider path consistent with QuantaHub policy."
         }))
         sys.exit(0)
 
