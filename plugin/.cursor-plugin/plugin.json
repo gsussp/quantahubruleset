@@ -1,9 +1,10 @@
 {
   "name": "quantahub-policy",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Canonical architecture, security, agent orchestration and verification policy pack for QuantaHub cyber range development.",
   "author": { "name": "QuantaHub" },
   "repository": "https://github.com/gsussp/quantahubruleset",
+  "license": "Apache-2.0",
   "keywords": ["quantahub", "cyber-range", "ctfd", "security", "architecture", "agents"],
   "rules": "./rules/",
   "agents": "./agents/",
