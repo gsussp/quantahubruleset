@@ -1,9 +1,19 @@
 # Changelog
 
+## 0.3.0
+
+- Switched all 13 QuantaHub rules to `alwaysApply: true`.
+- Added deterministic engineering tie-breakers in `DECISION_POLICY.md`.
+- Added canonical `VERSION` file.
+- Added strict `beforeSubmitPrompt` GitHub freshness check on every prompt.
+- Stale, mismatched or unverifiable policy versions now block prompt submission.
+- Added CI tests for remote freshness enforcement.
+- CI now verifies rule inventory and that no contextual QuantaHub rule remains.
+- Plugin, marketplace and VERSION must match exactly.
+
 ## 0.2.0
 
-- Main Cursor Agent is now the Master/Orchestrator.
-- Reduced always-applied rules to constitutional policy only.
+- Main Cursor Agent became the Master/Orchestrator.
 - Added fail-closed security hooks and executable policy guard.
 - Added machine-readable Lab Manifest JSON Schema.
 - Added policy validation CI.
