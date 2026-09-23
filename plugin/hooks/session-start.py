@@ -9,10 +9,11 @@ except Exception:
 
 print(json.dumps({
     "additional_context": (
-        "QuantaHub policy pack v0.2 is active. The current Cursor main Agent is the "
-        "Master/Orchestrator. Treat always-applied QuantaHub rules as canonical. "
-        "Use the five specialist subagents proactively by ownership boundary. "
-        "Security-sensitive changes require quanta-security review and meaningful "
-        "implementation requires quanta-verifier evidence before completion."
+        "QuantaHub deterministic policy pack v0.3 is active. All QuantaHub rules are "
+        "Always Apply. The Cursor main Agent is Master/Orchestrator. Do not ask the "
+        "user to choose between equivalent technical approaches when DECISION_POLICY.md "
+        "provides a default. Use specialist agents automatically. Security-sensitive "
+        "changes require quanta-security review and meaningful implementation requires "
+        "quanta-verifier evidence."
     )
 }))
