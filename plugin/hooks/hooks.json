@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      { "command": "python ${CURSOR_PLUGIN_ROOT}/hooks/session-start.py" }
+    ],
+    "preToolUse": [
+      { "command": "python ${CURSOR_PLUGIN_ROOT}/hooks/audit-tool.py", "matcher": "Shell|Write|Delete|Task" }
+    ]
+  }
+}
