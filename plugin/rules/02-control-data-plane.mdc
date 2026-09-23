@@ -1,0 +1,17 @@
+---
+description: Mandatory separation between control plane and hostile lab/data plane.
+alwaysApply: true
+---
+# Control Plane / Lab Plane
+
+The control plane contains identity, content, progress, business data, orchestration metadata and administrative systems.
+The lab plane executes intentionally vulnerable workloads.
+
+Mandatory invariants:
+
+- Lab workloads cannot reach control-plane databases, caches, secrets or management interfaces.
+- Lab workloads cannot reach runner management services.
+- Lab workloads cannot communicate across user/session boundaries unless a scenario explicitly models shared networking.
+- Public users do not connect directly to runner management addresses.
+- Access to lab services is brokered through session-aware gateways.
+- Public beta/production should place control and lab planes on separate hosts/VMs or equivalent strong boundaries.
