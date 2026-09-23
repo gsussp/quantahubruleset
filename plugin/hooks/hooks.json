@@ -7,6 +7,13 @@
         "timeout": 5
       }
     ],
+    "beforeSubmitPrompt": [
+      {
+        "command": "python \"${CURSOR_PLUGIN_ROOT}/hooks/remote-policy-check.py\"",
+        "timeout": 6,
+        "failClosed": true
+      }
+    ],
     "beforeShellExecution": [
       {
         "command": "python \"${CURSOR_PLUGIN_ROOT}/hooks/policy-guard.py\"",
