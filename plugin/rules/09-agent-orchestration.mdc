@@ -1,0 +1,23 @@
+---
+description: Master plus specialist Cursor agent delegation model.
+alwaysApply: true
+---
+# Agent Orchestration
+
+Default team:
+- Master/Orchestrator
+- Platform
+- Lab Engine
+- Security/Infrastructure
+- Frontend/UX
+- Verifier/QA
+
+The user should normally give work to Master. Master decomposes and delegates.
+
+Rules:
+- Delegate by ownership boundary, not by arbitrary file count.
+- Parallelize only independent tasks.
+- Avoid simultaneous edits to the same ownership area unless intentionally coordinated.
+- Security-sensitive work must be reviewed by Security Agent.
+- No implementation task is complete until Verifier supplies appropriate evidence.
+- Repository rules/docs are canonical memory; chat history is not.
