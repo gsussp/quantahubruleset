@@ -1,8 +1,37 @@
 # QuantaHub Ruleset
 
-Canonical architecture, security, engineering, Cursor-agent orchestration and verification policy for the QuantaHub cyber-range platform.
+Canonical deterministic architecture, security, engineering, Cursor-agent orchestration and verification policy for the QuantaHub cyber-range platform.
 
-Current policy version: **0.2.0**
+Current policy version: **0.3.0**
+
+## Deterministic Cursor mode
+
+QuantaHub uses a strict policy model:
+
+```text
+User prompt
+    |
+    v
+Remote GitHub VERSION check
+    |
+    +-- stale/unreachable --> BLOCK
+    |
+    v
+13/13 rules Always Apply
+    |
+    v
+Cursor Main Agent = Master/Orchestrator
+    |
+    +--> quanta-platform
+    +--> quanta-lab-engine
+    +--> quanta-security
+    +--> quanta-frontend
+    +--> quanta-verifier
+```
+
+Cursor does not choose which QuantaHub rule to read. **Every rule is loaded for every Agent task.**
+
+`docs/DECISION_POLICY.md` defines deterministic technical defaults so the Agent does not ask the user to choose between equivalent implementation approaches.
 
 ## Architecture
 
@@ -21,34 +50,19 @@ Runner / Sandbox Plane
 
 Vulnerable lab execution is a separate trust domain and uses a separate registrable web domain from platform/authentication origins.
 
-## Cursor model
-
-The normal Cursor main Agent is the **Master/Orchestrator**.
-
-Five specialist subagents:
-- `quanta-platform`
-- `quanta-lab-engine`
-- `quanta-security`
-- `quanta-frontend`
-- `quanta-verifier`
-
-The plugin bundles:
-- constitutional always-applied rules,
-- contextual specialist rules,
-- five specialist subagents,
-- fail-closed high-risk shell hooks,
-- machine-readable Lab Manifest schema.
-
 ## Machine enforcement
 
+- `VERSION` is the canonical policy version.
+- `beforeSubmitPrompt` checks GitHub `main/VERSION` before every prompt.
+- `plugin/hooks/policy-guard.py` blocks selected unsafe runtime commands.
 - `schemas/lab-manifest.schema.json` validates published lab manifests.
-- `plugin/hooks/policy-guard.py` blocks selected high-confidence unsafe runtime commands.
-- `.github/workflows/policy-ci.yml` validates policy structure and hook syntax.
-- Security/runtime/application controls remain authoritative; AI rules are not a substitute for technical isolation.
+- GitHub Actions validates rule inventory, Always Apply state, version consistency, schemas and hook tests.
 
 ## Canonical documents
 
 - `docs/DECISIONS.md`
+- `docs/DECISION_POLICY.md`
+- `docs/REMOTE_POLICY_SYNC.md`
 - `docs/SYSTEM_ARCHITECTURE.md`
 - `docs/SECURITY_MODEL.md`
 - `docs/API_CONTRACTS.md`

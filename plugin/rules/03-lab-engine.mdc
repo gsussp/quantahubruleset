@@ -1,6 +1,6 @@
 ---
 description: Use proactively when changing lab registry, manifests, sessions, scheduler, runner, runtime providers, TTL, cleanup or gateways.
-alwaysApply: false
+alwaysApply: true
 ---
 # Lab Engine Rules
 

@@ -1,23 +1,66 @@
 ---
-description: Main Agent plus five specialist Cursor subagents delegation model.
+description: Deterministic Main Agent plus five specialist subagents routing policy.
 alwaysApply: true
 ---
 # Agent Orchestration
 
-The current Cursor main Agent is the QuantaHub Master/Orchestrator. Do not create an extra orchestration subagent layer by default.
+The Cursor main Agent is the QuantaHub Master/Orchestrator. Do not create an extra orchestration subagent.
 
-Specialist subagents:
-- quanta-platform
-- quanta-lab-engine
-- quanta-security
-- quanta-frontend
-- quanta-verifier
+## Mandatory routing table
 
-Rules:
-- The user normally gives work to the main Agent; it decomposes and delegates.
-- Delegate by ownership boundary, not arbitrary file count.
-- Use specialist agents proactively when their description matches the work.
-- Parallelize only independent tasks and avoid concurrent edits to the same ownership area.
-- Security-sensitive work must be reviewed by quanta-security.
-- No meaningful implementation is complete until quanta-verifier supplies appropriate evidence.
-- Repository rules/docs are canonical memory; chat history is not.
+Invoke specialists automatically using these triggers:
+
+### quanta-platform — REQUIRED when work touches
+- CTFd core integration, plugins, themes or APIs,
+- authentication/identity,
+- users, teams, challenges or flags,
+- learning/progress/organizations/tenancy,
+- platform-side relational models or migrations,
+- platform API behavior.
+
+### quanta-lab-engine — REQUIRED when work touches
+- Lab Registry or Lab Manifest,
+- sessions or lifecycle,
+- scheduler/capacity,
+- runner agents,
+- Docker/gVisor/Firecracker/KVM runtime providers,
+- TTL/reset/cleanup/orphan reconciliation,
+- Lab Gateway routing/resource profiles.
+
+### quanta-frontend — REQUIRED when work touches
+- dashboard,
+- learning paths/rooms,
+- CTFd theme UI,
+- lab start/stop/reset controls,
+- terminal/web embedding,
+- responsive/accessibility behavior.
+
+### quanta-security — REQUIRED review when work touches
+- authentication/authorization/tenant isolation,
+- secrets or service identity,
+- lab/runtime privilege,
+- networking/DNS/ingress/egress,
+- browser origins/domains/cookies,
+- gateways,
+- supply chain,
+- malware/high-risk labs,
+- abuse controls,
+- administrative security.
+
+### quanta-verifier — REQUIRED after every meaningful implementation
+Meaningful includes any behavior, contract, schema, migration, security, lab runtime, API, UI flow or infrastructure change.
+
+## Multi-domain tasks
+
+If a task touches multiple ownership domains:
+1. invoke every required implementation specialist,
+2. run independent work in parallel only when file/ownership overlap is absent,
+3. integrate results through the main Agent,
+4. run quanta-security if any security trigger exists,
+5. run quanta-verifier last.
+
+## No delegation questions
+
+Do not ask the user which specialist to use. This table decides.
+
+Repository rules/docs are canonical memory; chat history is not.

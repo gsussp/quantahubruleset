@@ -1,6 +1,6 @@
 ---
 description: Use when changing Git workflow, releases, dependencies, migrations, generated artifacts, upstream CTFd integration or architecture decisions.
-alwaysApply: false
+alwaysApply: true
 ---
 # Change Management
 

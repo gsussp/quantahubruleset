@@ -1,6 +1,6 @@
 ---
 description: Use when changing PostgreSQL, cache/queue state, events, session persistence, backups, telemetry or data lifecycle.
-alwaysApply: false
+alwaysApply: true
 ---
 # Data and State
 

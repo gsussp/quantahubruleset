@@ -96,3 +96,23 @@ Plugin manifests, hooks, rule frontmatter, specialist-agent inventory and schema
 Status: Accepted
 
 Quotas, TTL, rate limits, suspension, default-deny egress, monitoring and emergency controls are architectural requirements rather than later operational additions.
+
+## D-020 — All QuantaHub Cursor rules are Always Apply
+Status: Accepted
+
+Cursor does not decide which QuantaHub policy rule is relevant. All 13 rules are included on every Agent task.
+
+## D-021 — Canonical GitHub policy freshness is checked before every prompt
+Status: Accepted
+
+The installed plugin version must exactly match `main/VERSION` from `gsussp/quantahubruleset`. Stale, mismatched or unverifiable policy blocks prompt submission.
+
+## D-022 — Technical tie-breakers are deterministic
+Status: Accepted
+
+Equivalent technical choices are resolved by `docs/DECISION_POLICY.md`; the user is not asked unless the decision is product/business/legal, destructive, secret/credential-related, contradictory or requires relaxing a security invariant.
+
+## D-023 — Policy changes require a VERSION bump
+Status: Accepted
+
+CI rejects governed repository changes when the canonical VERSION has not changed. This prevents remote freshness checks from missing changed policy content.

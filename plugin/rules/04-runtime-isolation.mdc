@@ -1,6 +1,6 @@
 ---
 description: Always use when changing container, sandbox, microVM, VM, runner privilege, mount or resource-isolation behavior.
-alwaysApply: false
+alwaysApply: true
 ---
 # Runtime Isolation
 

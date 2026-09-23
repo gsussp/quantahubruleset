@@ -1,6 +1,6 @@
 ---
 description: Product-layer separation for learning paths, rooms, labs and assessments.
-alwaysApply: false
+alwaysApply: true
 ---
 # Learning Product Model
 

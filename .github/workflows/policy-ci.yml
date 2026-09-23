@@ -12,16 +12,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Install validation dependencies
         run: pip install -r requirements-dev.txt
-      - name: Validate policy pack
+      - name: Require policy version bump
+        run: python scripts/check_version_bump.py
+      - name: Validate deterministic policy pack
         run: python scripts/validate_policy.py
       - name: Compile Python hooks and validators
         run: python -m py_compile plugin/hooks/*.py scripts/*.py
       - name: Validate example Lab Manifest
         run: python scripts/validate_lab_manifest.py examples/lab-manifest.example.json
-      - name: Test policy guard
+      - name: Test runtime policy guard
         run: python scripts/test_policy_guard.py
+      - name: Test per-prompt remote policy freshness gate
+        run: python scripts/test_remote_policy_check.py

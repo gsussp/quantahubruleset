@@ -1,22 +1,51 @@
 ---
-description: Canonical QuantaHub engineering governance and architecture guardrails.
+description: Canonical QuantaHub deterministic engineering governance. Always authoritative.
 alwaysApply: true
 ---
 # QuantaHub Master Governance
 
-You are working under the QuantaHub architecture and security policy.
+This policy is mandatory on every Agent task. Do not decide whether to load another QuantaHub rule: all QuantaHub rules are Always Apply.
 
-Before proposing or implementing a meaningful change:
+## Execution authority order
 
-1. Identify which architectural boundary the change touches.
-2. Preserve accepted decisions unless the user explicitly changes them.
-3. Do not silently replace CTFd extension points with deep core forks.
-4. Do not couple CTFd directly to Docker, containerd, hypervisor or runner management privileges.
-5. Keep the control plane separate from intentionally vulnerable lab workloads.
-6. Treat labs as hostile and multi-tenant isolation as mandatory.
-7. Prefer small, reversible, testable changes.
-8. Do not call a task complete without appropriate verification.
-9. If a durable architecture decision changes, update canonical documentation/rules in the same change.
-10. When requirements conflict with security invariants, stop implementation and surface the conflict to the Master/Security agent.
+When instructions conflict, use this order:
+
+1. Explicit current user requirement.
+2. Non-negotiable security/trust-boundary invariants.
+3. Accepted decisions in docs/DECISIONS.md.
+4. QuantaHub rules and canonical docs.
+5. Existing project conventions and pinned dependencies.
+6. Deterministic fallback in docs/DECISION_POLICY.md.
+
+A user-requested architecture change must update the decision log and affected rules/docs in the same change. Never silently weaken a security invariant.
+
+## Before every meaningful implementation
+
+1. Read the task against all active QuantaHub rules.
+2. Inspect existing code/config before creating a parallel implementation.
+3. Identify affected boundaries: Platform/CTFd, Lab Engine, Security/Infra, Frontend, Data, Supply Chain.
+4. Use the required specialist agents automatically.
+5. Implement the smallest complete solution consistent with policy.
+6. Run required verification.
+7. Update canonical documentation when a durable decision or contract changes.
+
+## No unnecessary questions
+
+Do not ask the user to choose between equivalent engineering approaches when policy can decide. Apply the deterministic fallback and continue.
+
+Ask only when a missing decision is genuinely product/business/legal in nature, or when two requirements are irreconcilable without changing user intent.
+
+## Hard invariants
+
+- Prefer CTFd extension points over deep core forks.
+- CTFd never owns Docker/containerd/hypervisor privileges.
+- Control plane and intentionally vulnerable lab plane remain separate trust domains.
+- Labs are hostile and multi-tenant isolation is mandatory.
+- Default lab egress is deny.
+- Production lab browser origins are separate from platform/auth origins.
+- Open-source lab artifacts are pinned, reviewed and published through the controlled intake pipeline.
+- Durable state uses PostgreSQL as source of truth unless an accepted decision changes this.
+- Meaningful implementation is not complete without verifier evidence.
+- Security-boundary changes are not complete without security review.
 
 Canonical architecture is policy, not a suggestion.
