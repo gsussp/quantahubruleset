@@ -15,7 +15,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install validation dependencies
+        run: pip install -r requirements-dev.txt
       - name: Validate policy pack
         run: python scripts/validate_policy.py
-      - name: Compile hook scripts
+      - name: Compile Python hooks and validators
         run: python -m py_compile plugin/hooks/*.py scripts/*.py
+      - name: Validate example Lab Manifest
+        run: python scripts/validate_lab_manifest.py examples/lab-manifest.example.json
+      - name: Test policy guard
+        run: python scripts/test_policy_guard.py
