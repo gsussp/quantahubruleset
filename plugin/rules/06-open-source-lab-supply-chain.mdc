@@ -1,0 +1,20 @@
+---
+description: Policy for importing and hosting open-source vulnerable labs safely and legally.
+alwaysApply: true
+---
+# Open-Source Lab Intake
+
+Do not execute arbitrary upstream repository HEAD directly in production.
+
+Required intake path:
+1. identify source and license,
+2. verify commercial/hosting implications and attribution obligations,
+3. pin commit/image digest,
+4. review source/configuration appropriate to risk,
+5. build in controlled CI,
+6. scan/test the result,
+7. generate SBOM/sign/signature evidence when feasible,
+8. publish approved immutable artifact to controlled/private registry,
+9. reference published artifact from a versioned Lab Manifest.
+
+Store source URL, author, license, pinned revision and attribution metadata per lab version.
