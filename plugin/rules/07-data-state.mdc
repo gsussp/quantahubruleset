@@ -1,0 +1,12 @@
+---
+description: Durable state, caching, events and session-data rules.
+alwaysApply: true
+---
+# Data and State
+
+- PostgreSQL is the durable source of truth for core business/session metadata.
+- Redis/Valkey may be used for cache, rate limits, short locks and transient coordination, not as the only durable truth.
+- Provisioning requests create durable session/job identities and complete asynchronously.
+- Use explicit events for important state changes where useful.
+- Keep operational telemetry distinct from learner activity telemetry.
+- Do not centrally record complete user shell history by default without a defined requirement and policy.
