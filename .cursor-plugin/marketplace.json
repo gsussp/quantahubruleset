@@ -1,0 +1,15 @@
+{
+  "name": "quantahub-marketplace",
+  "owner": { "name": "QuantaHub" },
+  "metadata": {
+    "description": "QuantaHub Cursor policy and agent plugins",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "quantahub-policy",
+      "source": "plugin",
+      "description": "QuantaHub architecture, security, agent orchestration and verification rules"
+    }
+  ]
+}
