@@ -1,0 +1,43 @@
+{
+  "id": "juice-shop-basic",
+  "name": "OWASP Juice Shop Basic",
+  "version": "1.0.0",
+  "source": {
+    "repository": "https://github.com/juice-shop/juice-shop",
+    "revision": "0123456789abcdef",
+    "license": "MIT",
+    "attribution": "OWASP Juice Shop"
+  },
+  "runtime": {
+    "class": "sandboxed-container",
+    "provider": "gvisor",
+    "privileged": false,
+    "hostNetwork": false,
+    "hostPID": false,
+    "hostIPC": false,
+    "dockerSocket": false
+  },
+  "resources": {
+    "profile": "small",
+    "cpu": 1,
+    "memoryMb": 1024,
+    "pids": 256,
+    "diskMb": 2048,
+    "bandwidthKbps": 4096
+  },
+  "network": {
+    "egressPolicy": "deny",
+    "ingress": ["http:3000"],
+    "dnsPolicy": "controlled"
+  },
+  "lifecycle": {
+    "ttlSeconds": 3600,
+    "resetSupported": true
+  },
+  "access": {
+    "web": ["http:3000"],
+    "terminal": true,
+    "ssh": false,
+    "rdp": false
+  }
+}
