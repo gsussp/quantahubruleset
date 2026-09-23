@@ -2,10 +2,26 @@
   "version": 1,
   "hooks": {
     "sessionStart": [
-      { "command": "python ${CURSOR_PLUGIN_ROOT}/hooks/session-start.py" }
+      {
+        "command": "python \"${CURSOR_PLUGIN_ROOT}/hooks/session-start.py\"",
+        "timeout": 5
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": "python \"${CURSOR_PLUGIN_ROOT}/hooks/policy-guard.py\"",
+        "matcher": ".*",
+        "timeout": 5,
+        "failClosed": true
+      }
     ],
     "preToolUse": [
-      { "command": "python ${CURSOR_PLUGIN_ROOT}/hooks/audit-tool.py", "matcher": "Shell|Write|Delete|Task" }
+      {
+        "command": "python \"${CURSOR_PLUGIN_ROOT}/hooks/policy-guard.py\"",
+        "matcher": "Write",
+        "timeout": 5,
+        "failClosed": true
+      }
     ]
   }
 }
