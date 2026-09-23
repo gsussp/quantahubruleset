@@ -1,0 +1,23 @@
+---
+description: Runtime isolation and resource-control policy for hostile cyber-range workloads.
+alwaysApply: true
+---
+# Runtime Isolation
+
+Use the weakest runtime only when its isolation is sufficient for the lab threat model.
+
+Conceptual classes:
+- standard container for lower-risk web training,
+- sandboxed container such as gVisor when meaningful code execution is expected,
+- microVM/full VM such as Firecracker/KVM for stronger isolation, kernel/malware/AD/Windows scenarios.
+
+Mandatory defaults:
+- no privileged containers,
+- no Docker socket mounts,
+- no host PID/IPC/network modes,
+- no sensitive host filesystem mounts,
+- drop Linux capabilities by default,
+- apply CPU, memory, PID, disk/IO and bandwidth limits,
+- use seccomp/AppArmor/LSM controls where applicable.
+
+Rootless mode is defense in depth, not the sole boundary.
