@@ -1,0 +1,16 @@
+---
+description: Lab engine, runtime abstraction, lifecycle and cleanup requirements.
+alwaysApply: true
+---
+# Lab Engine Rules
+
+- Lab orchestration is QuantaHub-owned and independent from CTFd internals.
+- Use runtime-provider interfaces. Do not leak Docker-specific assumptions into domain APIs.
+- Supported conceptual operations: provision/start/health/reset/stop/destroy.
+- Model labs as multi-service topologies, not only single containers.
+- Every session has an explicit state machine and TTL.
+- Provisioning is asynchronous.
+- State transitions must be idempotent or safely retryable.
+- Cleanup is deterministic and includes runtime workloads, networks, ephemeral volumes/state, routes, DNS/gateway records, credentials/tokens and resource reservations.
+- Maintain an orphan reaper/reconciliation process.
+- Capacity decisions are based primarily on active sessions and resource profiles, not registered-user count.
