@@ -1,6 +1,6 @@
 ---
-description: Lab engine, runtime abstraction, lifecycle and cleanup requirements.
-alwaysApply: true
+description: Use proactively when changing lab registry, manifests, sessions, scheduler, runner, runtime providers, TTL, cleanup or gateways.
+alwaysApply: false
 ---
 # Lab Engine Rules
 
@@ -14,3 +14,4 @@ alwaysApply: true
 - Cleanup is deterministic and includes runtime workloads, networks, ephemeral volumes/state, routes, DNS/gateway records, credentials/tokens and resource reservations.
 - Maintain an orphan reaper/reconciliation process.
 - Capacity decisions are based primarily on active sessions and resource profiles, not registered-user count.
+- Validate every published lab against the canonical Lab Manifest schema.
