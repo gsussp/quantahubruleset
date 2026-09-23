@@ -2,14 +2,14 @@
   "name": "quantahub-marketplace",
   "owner": { "name": "QuantaHub" },
   "metadata": {
-    "description": "QuantaHub Cursor policy and agent plugins",
-    "version": "0.2.0"
+    "description": "QuantaHub deterministic Cursor policy and agent plugins",
+    "version": "0.3.0"
   },
   "plugins": [
     {
       "name": "quantahub-policy",
       "source": "plugin",
-      "description": "QuantaHub architecture, security, agent orchestration and verification rules"
+      "description": "QuantaHub deterministic architecture, security, orchestration and verification rules"
     }
   ]
 }
