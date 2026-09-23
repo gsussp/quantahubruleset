@@ -1,6 +1,6 @@
 ---
-description: Runtime isolation and resource-control policy for hostile cyber-range workloads.
-alwaysApply: true
+description: Always use when changing container, sandbox, microVM, VM, runner privilege, mount or resource-isolation behavior.
+alwaysApply: false
 ---
 # Runtime Isolation
 
@@ -20,4 +20,4 @@ Mandatory defaults:
 - apply CPU, memory, PID, disk/IO and bandwidth limits,
 - use seccomp/AppArmor/LSM controls where applicable.
 
-Rootless mode is defense in depth, not the sole boundary.
+Rootless mode is defense in depth, not the sole boundary. Runtime configuration must satisfy the Lab Manifest schema and Security Model.
