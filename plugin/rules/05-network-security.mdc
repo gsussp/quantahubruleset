@@ -1,6 +1,6 @@
 ---
 description: Always use when changing lab networking, DNS, IPv4/IPv6 routing, gateways, ingress, egress, domains or browser-origin boundaries.
-alwaysApply: false
+alwaysApply: true
 ---
 # Lab Networking
 
