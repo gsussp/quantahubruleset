@@ -10,15 +10,7 @@
     "beforeShellExecution": [
       {
         "command": "python \"${CURSOR_PLUGIN_ROOT}/hooks/policy-guard.py\"",
-        "matcher": ".*",
-        "timeout": 5,
-        "failClosed": true
-      }
-    ],
-    "preToolUse": [
-      {
-        "command": "python \"${CURSOR_PLUGIN_ROOT}/hooks/policy-guard.py\"",
-        "matcher": "Write",
+        "matcher": "(docker|podman|kubectl|nerdctl|containerd|firecracker|qemu|virsh|iptables|nft|ip )",
         "timeout": 5,
         "failClosed": true
       }
