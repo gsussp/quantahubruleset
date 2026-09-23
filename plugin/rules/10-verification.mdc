@@ -1,0 +1,23 @@
+---
+description: Definition of done and independent verification policy.
+alwaysApply: true
+---
+# Verification Policy
+
+Never equate code generation with completion.
+
+Choose tests appropriate to the change:
+- unit tests,
+- integration tests,
+- E2E tests,
+- API-contract tests,
+- lab lifecycle tests,
+- TTL/cleanup tests,
+- network-isolation tests,
+- authorization tests,
+- regression tests,
+- security checks.
+
+For lab infrastructure, verify both the happy path and cleanup/failure path.
+For security boundaries, require negative tests proving prohibited access fails.
+Report unresolved risks instead of hiding them.
