@@ -1,6 +1,6 @@
 ---
 description: Always use when importing, updating, building, licensing, scanning, signing or publishing third-party/open-source labs.
-alwaysApply: false
+alwaysApply: true
 ---
 # Open-Source Lab Intake
 
