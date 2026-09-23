@@ -1,0 +1,13 @@
+---
+description: Rules for using CTFd as QuantaHub's reusable platform shell.
+alwaysApply: true
+---
+# CTFd Boundary Rules
+
+- Reuse CTFd for commodity features where practical: users, challenges, flags, teams, scoreboard, admin and CTF event mechanics.
+- Prefer CTFd plugins, themes, APIs and adapters over invasive core modifications.
+- Keep custom QuantaHub domain concepts behind clear modules/adapters.
+- CTFd must not own the cyber-range isolation boundary.
+- CTFd must never receive Docker socket, container runtime, hypervisor or unrestricted runner privileges.
+- The Lab Orchestrator remains separately deployable and separately permissioned.
+- Normal learning workflows may use QuantaHub-native modules instead of forcing every room/path through CTFd.
