@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 import json
+import os
 import sys
 import urllib.request
 from pathlib import Path
 
-REMOTE_VERSION_URL = "https://raw.githubusercontent.com/gsussp/quantahubruleset/main/VERSION"
+DEFAULT_REMOTE_VERSION_URL = "https://raw.githubusercontent.com/gsussp/quantahubruleset/main/VERSION"
+REMOTE_VERSION_URL = os.environ.get("QUANTAHUB_POLICY_VERSION_URL", DEFAULT_REMOTE_VERSION_URL)
 PLUGIN_ROOT = Path(__file__).resolve().parents[1]
 PLUGIN_MANIFEST = PLUGIN_ROOT / ".cursor-plugin" / "plugin.json"
 
