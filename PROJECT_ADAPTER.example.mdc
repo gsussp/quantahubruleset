@@ -1,0 +1,5 @@
+---
+description: Forces project agents to respect the installed QuantaHub policy pack.
+alwaysApply: true
+---
+This project is governed by the QuantaHub policy pack. Before architecture-sensitive implementation, use the QuantaHub Master/Orchestrator and relevant specialist agents. Do not bypass control-plane/lab-plane separation, runtime isolation, supply-chain intake, security review or verification requirements.
