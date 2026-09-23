@@ -1,6 +1,6 @@
 ---
-description: Policy for importing and hosting open-source vulnerable labs safely and legally.
-alwaysApply: true
+description: Always use when importing, updating, building, licensing, scanning, signing or publishing third-party/open-source labs.
+alwaysApply: false
 ---
 # Open-Source Lab Intake
 
@@ -13,8 +13,9 @@ Required intake path:
 4. review source/configuration appropriate to risk,
 5. build in controlled CI,
 6. scan/test the result,
-7. generate SBOM/sign/signature evidence when feasible,
-8. publish approved immutable artifact to controlled/private registry,
-9. reference published artifact from a versioned Lab Manifest.
+7. generate SBOM and signing/provenance evidence when feasible,
+8. publish approved immutable artifact to a controlled registry,
+9. reference the artifact from a versioned Lab Manifest,
+10. preserve source, license and attribution metadata.
 
-Store source URL, author, license, pinned revision and attribution metadata per lab version.
+A public repository without a suitable license is not automatically approved for commercial hosting.

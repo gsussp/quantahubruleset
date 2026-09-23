@@ -4,40 +4,64 @@
 
 Use this repository as persistent engineering policy instead of repeating prompts for every Cursor task.
 
-## Best model: Cursor Plugin
+## Recommended model: Cursor Plugin
 
-This repository is prepared as a Cursor plugin/marketplace source. Install the plugin at project scope so QuantaHub rules and custom agents are available in the project.
+Install the `plugin/` directory as the QuantaHub Cursor Plugin. It packages rules, five specialist subagents and hooks. The normal Cursor main Agent acts as the QuantaHub Master/Orchestrator.
 
-Important: a random external GitHub repository is not automatically read on every Agent turn. It must be installed/imported as a Cursor plugin, or its rules must exist in the project's `.cursor/rules` hierarchy.
+A random GitHub URL is not persistent policy. The plugin must be installed, or its components must be copied/synced into Cursor-supported project locations.
 
-## Why rules are split
+## Local validation/install workflow
 
-Cursor rules are persistent prompt context. Small focused rules are easier to apply, update and reason about than one huge master document.
-
-The `00-master-governance.mdc` rule is `alwaysApply: true`. Other fundamental rules are also always-applied where architectural drift would be dangerous. Context-heavy specialist rules can be agent-decided or file-scoped later if token pressure becomes significant.
-
-## Stronger enforcement
-
-Rules guide the model; they are not a cryptographic policy boundary. Hooks can observe/block tool actions and are used as an additional policy layer. Security controls must still be implemented in code, tests, CI and infrastructure.
-
-## Alternative: project-local rules
-
-If plugin import is not desired, copy or sync `plugin/rules/*.mdc` into:
+For local plugin testing, place the contents of this repository's `plugin/` directory in:
 
 ```text
-<target-project>/.cursor/rules/quantahub/
+~/.cursor/plugins/local/quantahub-policy/
 ```
 
-Cursor supports nested rule folders.
+That target directory must contain `.cursor-plugin/plugin.json`. Restart Cursor or reload the window, then verify the plugin in Customize.
 
-A Git submodule may also be used if you want GitHub to remain canonical:
+The policy guard requires a Python 3 interpreter available as `python`. Security-critical shell hooks use `failClosed: true`; if the guard cannot run, matching high-risk shell actions are blocked rather than silently allowed.
+
+## Project-local fallback
+
+If plugin installation is not desired:
 
 ```text
-<target-project>/.cursor/rules/quantahub/  -> rules repository/subtree
+<project>/.cursor/rules/quantahub/   <- copy plugin/rules/*
+<project>/.cursor/agents/            <- copy plugin/agents/*
 ```
 
-Keep rule files inside `.cursor/rules` as `.mdc` with valid frontmatter.
+Hooks are not activated merely by copying rules/agents. Use the plugin form when hook enforcement is required.
+
+## Git submodule option
+
+Do not mount the whole ruleset repository directly as `.cursor/rules/quantahub`; the actual rule files live under `plugin/rules`.
+
+Instead:
+
+```text
+vendor/quantahubruleset/             <- Git submodule
+.cursor/rules/quantahub/             <- generated/synced copy of vendor/quantahubruleset/plugin/rules/
+.cursor/agents/                       <- generated/synced copy of vendor/quantahubruleset/plugin/agents/
+```
+
+Automate that sync in project bootstrap/CI if this fallback is used.
+
+## Context strategy
+
+Always-applied constitutional rules are intentionally small:
+- master governance,
+- CTFd boundaries,
+- control/lab trust boundary,
+- agent orchestration,
+- definition of done.
+
+Specialist rules are contextual and selected when their descriptions match the work.
+
+## Enforcement model
+
+Rules guide the model. Hooks add preventive guardrails for selected high-confidence dangerous shell operations. JSON Schema and CI provide machine validation. Runtime/application security controls remain authoritative and must not depend on agent compliance alone.
 
 ## Hard rule
 
-Do not assume that linking to a GitHub URL in a prompt makes it persistent policy. Install/sync the policy into Cursor's supported rule/plugin system.
+Never assume "the Agent read the GitHub repository" unless the policy plugin or project-local components are actually installed.

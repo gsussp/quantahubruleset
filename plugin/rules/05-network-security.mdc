@@ -1,14 +1,16 @@
 ---
-description: Network segmentation, gateway and egress rules for cyber-range labs.
-alwaysApply: true
+description: Always use when changing lab networking, DNS, IPv4/IPv6 routing, gateways, ingress, egress, domains or browser-origin boundaries.
+alwaysApply: false
 ---
 # Lab Networking
 
 - Every lab session receives a distinct network security boundary.
-- Default lab egress is DENY.
+- Default lab egress is DENY for IPv4 and IPv6.
 - Internet access requires an explicit named egress policy with minimum destinations/protocols.
-- Labs cannot route to control-plane or management networks.
+- Labs cannot route to control-plane, management, metadata, link-local or other tenant networks.
+- DNS uses a controlled resolver policy; arbitrary external resolvers are not implicitly permitted.
 - Users never receive unrestricted runner management access.
 - HTTP/WebSocket/terminal/SSH/RDP access is brokered through session-aware gateways.
 - Gateway authorization validates authenticated user + active session + permitted endpoint; hostname knowledge alone is insufficient.
 - Use short-lived connection tokens where practical.
+- Production lab web origins use a different registrable domain from platform/authentication origins.

@@ -2,42 +2,43 @@
 
 ## Team
 
-QuantaHub starts with six agents total.
+QuantaHub uses the normal Cursor main Agent as the Master/Orchestrator plus five specialist subagents:
 
-1. Master / Orchestrator
-2. Platform Agent
-3. Lab Engine Agent
-4. Security / Infrastructure Agent
-5. Frontend / UX Agent
-6. Verifier / QA Agent
+1. quanta-platform
+2. quanta-lab-engine
+3. quanta-security
+4. quanta-frontend
+5. quanta-verifier
 
-## Master Agent responsibility
+There is no extra orchestration subagent by default.
 
-The user primarily talks to the Master Agent. The Master reads the project rules, decomposes work, selects specialists, parallelizes only independent work, reconciles results, requests security review when required and sends completion candidates to Verifier.
+## Main Agent responsibility
 
-A task is not complete because an implementation agent says so. Completion requires verification appropriate to the change.
+The user talks to the normal Cursor main Agent. The always-applied QuantaHub rules make that Agent the project coordinator. It reads canonical policy, decomposes work, selects specialists, parallelizes only independent work, reconciles results, requires security review when needed and sends meaningful implementations to Verifier.
 
-## Boundaries
+A task is not complete because an implementation agent says so. Completion requires evidence appropriate to the change.
 
-### Platform
+## Specialist boundaries
 
-CTFd integration/plugins/themes, users, challenges, flags, learning/progress, organizations, application APIs and relational data models. Does not directly control Docker/hypervisors.
+### quanta-platform
 
-### Lab Engine
+CTFd integration/plugins/themes, users, challenges, flags, learning/progress, tenancy, organizations, application APIs and relational data models. Does not directly control Docker/hypervisors.
 
-Registry, manifests, sessions, scheduler, runner, runtime providers, TTL, cleanup, health and gateway integration. Does not casually rewrite training UX or CTFd internals.
+### quanta-lab-engine
 
-### Security / Infrastructure
+Registry, manifests, sessions, scheduler, runner, runtime providers, TTL, cleanup, health, resource profiles and gateway integration.
 
-Threat model, network boundaries, egress, runtime hardening, secrets, mTLS/identity, reverse proxy, registry/supply chain and security review.
+### quanta-security
 
-### Frontend / UX
+Threat model, network/origin boundaries, egress, runtime hardening, secrets, mTLS/identity, authorization, abuse controls, registry/supply chain and security review.
 
-Dashboard, paths, rooms, lab controls, terminal/web embedding, progress and responsive product UX. Must consume defined APIs rather than bypassing service boundaries.
+### quanta-frontend
 
-### Verifier / QA
+Dashboard, paths, rooms, lab controls, terminal/web embedding, progress, accessibility and responsive product UX. Consumes defined APIs rather than bypassing service boundaries.
 
-Independent tests and evidence. Validates unit/integration/E2E behavior, lifecycle, isolation, cleanup, regression and security requirements.
+### quanta-verifier
+
+Independent tests and evidence. Validates unit/integration/E2E behavior, contracts/schemas, lifecycle, isolation, cleanup, authorization, regression and policy requirements.
 
 ## Parallel-work rule
 

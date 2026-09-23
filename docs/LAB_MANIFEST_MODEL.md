@@ -1,34 +1,61 @@
 # Lab Manifest Model
 
-A QuantaHub published lab version should eventually encode at least:
+The canonical machine-readable contract is:
 
-```yaml
-id: string
-name: string
-version: string
-source:
-  repository: string
-  commit_or_digest: string
-  license: string
-  attribution: string
-runtime:
-  class: container|sandboxed-container|microvm|full-vm
-  provider: string
-topology:
-  services: []
-resources:
-  profile: string
-network:
-  ingress: []
-  egress_policy: deny|named-policy
-lifecycle:
-  ttl_seconds: integer
-  reset_supported: boolean
-health:
-  checks: []
-access:
-  web: []
-  terminal: boolean
+```text
+schemas/lab-manifest.schema.json
 ```
 
-Production runner artifacts are approved/versioned artifacts, not arbitrary upstream checkout state.
+Every published lab version must validate against that schema before entering the approved registry.
+
+## Core fields
+
+```text
+id
+name
+version
+
+source
+  repository
+  revision
+  license
+  attribution
+
+runtime
+  class
+  provider
+  privileged=false
+  hostNetwork=false
+  hostPID=false
+  hostIPC=false
+  dockerSocket=false
+
+resources
+  profile
+  cpu
+  memoryMb
+  pids
+  diskMb
+  bandwidthKbps
+
+network
+  egressPolicy
+  ingress
+  dnsPolicy
+
+lifecycle
+  ttlSeconds
+  resetSupported
+
+access
+  web
+  terminal
+  ssh
+  rdp
+```
+
+The schema is intentionally restrictive. Runtime features that weaken isolation are not accepted as normal manifest options.
+
+See `examples/lab-manifest.example.json` for a valid example.
+
+Production runner artifacts are approved/versioned artifacts, never arbitrary mutable upstream checkout state.

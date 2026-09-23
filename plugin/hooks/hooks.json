@@ -2,10 +2,18 @@
   "version": 1,
   "hooks": {
     "sessionStart": [
-      { "command": "python ${CURSOR_PLUGIN_ROOT}/hooks/session-start.py" }
+      {
+        "command": "python \"${CURSOR_PLUGIN_ROOT}/hooks/session-start.py\"",
+        "timeout": 5
+      }
     ],
-    "preToolUse": [
-      { "command": "python ${CURSOR_PLUGIN_ROOT}/hooks/audit-tool.py", "matcher": "Shell|Write|Delete|Task" }
+    "beforeShellExecution": [
+      {
+        "command": "python \"${CURSOR_PLUGIN_ROOT}/hooks/policy-guard.py\"",
+        "matcher": "(docker|podman|kubectl|nerdctl|containerd|firecracker|qemu|virsh|iptables|nft|ip )",
+        "timeout": 5,
+        "failClosed": true
+      }
     ]
   }
 }

@@ -1,9 +1,18 @@
 #!/usr/bin/env python3
-import json, sys
+import json
+import sys
+
 try:
-    _ = json.load(sys.stdin)
+    json.load(sys.stdin)
 except Exception:
-    _ = {}
+    pass
+
 print(json.dumps({
-    "additional_context": "QuantaHub policy pack is active. Treat installed QuantaHub always-apply rules as canonical architecture/security constraints. Delegate security-sensitive work for security review and do not report implementation complete without verification."
+    "additional_context": (
+        "QuantaHub policy pack v0.2 is active. The current Cursor main Agent is the "
+        "Master/Orchestrator. Treat always-applied QuantaHub rules as canonical. "
+        "Use the five specialist subagents proactively by ownership boundary. "
+        "Security-sensitive changes require quanta-security review and meaningful "
+        "implementation requires quanta-verifier evidence before completion."
+    )
 }))

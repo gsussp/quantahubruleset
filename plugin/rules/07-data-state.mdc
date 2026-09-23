@@ -1,6 +1,6 @@
 ---
-description: Durable state, caching, events and session-data rules.
-alwaysApply: true
+description: Use when changing PostgreSQL, cache/queue state, events, session persistence, backups, telemetry or data lifecycle.
+alwaysApply: false
 ---
 # Data and State
 
@@ -10,3 +10,5 @@ alwaysApply: true
 - Use explicit events for important state changes where useful.
 - Keep operational telemetry distinct from learner activity telemetry.
 - Do not centrally record complete user shell history by default without a defined requirement and policy.
+- Schema migrations require rollback/recovery thinking.
+- Backup and restore behavior must follow the canonical recovery policy before production.
