@@ -132,6 +132,7 @@ for path in [
     ROOT / "plugin" / "hooks" / "policy-guard.py",
     ROOT / "plugin" / "hooks" / "remote-policy-check.py",
     ROOT / "plugin" / "hooks" / "session-start.py",
+    ROOT / "scripts" / "check_version_bump.py",
     ROOT / "scripts" / "test_policy_guard.py",
     ROOT / "scripts" / "test_remote_policy_check.py",
 ]:
