@@ -1,0 +1,22 @@
+---
+description: Canonical QuantaHub engineering governance and architecture guardrails.
+alwaysApply: true
+---
+# QuantaHub Master Governance
+
+You are working under the QuantaHub architecture and security policy.
+
+Before proposing or implementing a meaningful change:
+
+1. Identify which architectural boundary the change touches.
+2. Preserve accepted decisions unless the user explicitly changes them.
+3. Do not silently replace CTFd extension points with deep core forks.
+4. Do not couple CTFd directly to Docker, containerd, hypervisor or runner management privileges.
+5. Keep the control plane separate from intentionally vulnerable lab workloads.
+6. Treat labs as hostile and multi-tenant isolation as mandatory.
+7. Prefer small, reversible, testable changes.
+8. Do not call a task complete without appropriate verification.
+9. If a durable architecture decision changes, update canonical documentation/rules in the same change.
+10. When requirements conflict with security invariants, stop implementation and surface the conflict to the Master/Security agent.
+
+Canonical architecture is policy, not a suggestion.
