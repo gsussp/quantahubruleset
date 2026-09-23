@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantahub.dev/schemas/lab-manifest.schema.json",
+  "title": "QuantaHub Lab Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "version", "source", "runtime", "resources", "network", "lifecycle", "access"],
+  "properties": {
+    "id": {"type":"string","pattern":"^[a-z0-9][a-z0-9._-]{2,63}$"},
+    "name": {"type":"string","minLength":1,"maxLength":120},
+    "version": {"type":"string","minLength":1,"maxLength":64},
+    "source": {
+      "type":"object",
+      "additionalProperties": false,
+      "required":["repository","revision","license"],
+      "properties":{
+        "repository":{"type":"string","minLength":1},
+        "revision":{"type":"string","minLength":7},
+        "license":{"type":"string","minLength":1},
+        "attribution":{"type":"string"}
+      }
+    },
+    "runtime": {
+      "type":"object",
+      "additionalProperties": false,
+      "required":["class"],
+      "properties":{
+        "class":{"enum":["container","sandboxed-container","microvm","full-vm"]},
+        "provider":{"type":"string"},
+        "privileged":{"const":false},
+        "hostNetwork":{"const":false},
+        "hostPID":{"const":false},
+        "hostIPC":{"const":false},
+        "dockerSocket":{"const":false}
+      }
+    },
+    "resources": {
+      "type":"object",
+      "additionalProperties": false,
+      "required":["profile"],
+      "properties":{
+        "profile":{"type":"string","minLength":1},
+        "cpu":{"type":"number","exclusiveMinimum":0},
+        "memoryMb":{"type":"integer","minimum":64},
+        "pids":{"type":"integer","minimum":16},
+        "diskMb":{"type":"integer","minimum":64},
+        "bandwidthKbps":{"type":"integer","minimum":64}
+      }
+    },
+    "network": {
+      "type":"object",
+      "additionalProperties": false,
+      "required":["egressPolicy"],
+      "properties":{
+        "egressPolicy":{"type":"string","pattern":"^(deny|policy:[a-z0-9._-]+)$"},
+        "ingress":{"type":"array","items":{"type":"string"}},
+        "dnsPolicy":{"type":"string"}
+      }
+    },
+    "lifecycle": {
+      "type":"object",
+      "additionalProperties": false,
+      "required":["ttlSeconds"],
+      "properties":{
+        "ttlSeconds":{"type":"integer","minimum":300,"maximum":28800},
+        "resetSupported":{"type":"boolean"}
+      }
+    },
+    "access": {
+      "type":"object",
+      "additionalProperties": false,
+      "properties":{
+        "web":{"type":"array","items":{"type":"string"}},
+        "terminal":{"type":"boolean"},
+        "ssh":{"type":"boolean"},
+        "rdp":{"type":"boolean"}
+      }
+    }
+  }
+}
