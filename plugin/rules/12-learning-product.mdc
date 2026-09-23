@@ -1,0 +1,20 @@
+---
+description: Product-layer separation for learning paths, rooms, labs and assessments.
+alwaysApply: false
+---
+# Learning Product Model
+
+Keep learning content and lab runtime definitions decoupled.
+A room/lesson may reference a versioned lab but should not embed runtime implementation details.
+
+Product concepts may include:
+- learning paths,
+- modules/rooms,
+- lessons,
+- tasks/questions/hints,
+- labs,
+- XP/levels/badges,
+- certificates,
+- organizations/instructors.
+
+Replacing lab version v3 with v4 should not require rewriting unrelated lesson content.
