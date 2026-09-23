@@ -2,66 +2,93 @@
 
 ## Goal
 
-Use this repository as persistent engineering policy instead of repeating prompts for every Cursor task.
+Cursor must work under QuantaHub policy continuously without requiring the user to remind it to read rules or choose which policy applies.
 
-## Recommended model: Cursor Plugin
+## Required model: Cursor Plugin
 
-Install the `plugin/` directory as the QuantaHub Cursor Plugin. It packages rules, five specialist subagents and hooks. The normal Cursor main Agent acts as the QuantaHub Master/Orchestrator.
+Install the `plugin/` directory as the QuantaHub Cursor Plugin. The normal Cursor main Agent is the Master/Orchestrator.
 
-A random GitHub URL is not persistent policy. The plugin must be installed, or its components must be copied/synced into Cursor-supported project locations.
+The plugin contains:
+- all 13 QuantaHub rules,
+- five specialist subagents,
+- session policy context,
+- per-prompt canonical GitHub freshness enforcement,
+- high-risk shell policy enforcement.
 
-## Local validation/install workflow
+## All rules are Always Apply
 
-For local plugin testing, place the contents of this repository's `plugin/` directory in:
+Deterministic mode intentionally uses:
+
+```yaml
+alwaysApply: true
+```
+
+for every QuantaHub rule.
+
+Cursor does not decide which QuantaHub rule is relevant. All rules are available on every Agent task.
+
+This uses more context than selective rules by design; consistency is more important than context minimization for this project.
+
+## Canonical GitHub freshness check
+
+Before every user prompt is submitted, `beforeSubmitPrompt` executes:
+
+```text
+plugin/hooks/remote-policy-check.py
+```
+
+It compares:
+- local installed plugin version,
+- canonical `main/VERSION` from `gsussp/quantahubruleset`.
+
+Exact match is required.
+
+Strict behavior:
+- equal -> prompt continues,
+- stale/mismatched -> blocked,
+- GitHub cannot be reached -> blocked,
+- local policy version unreadable -> blocked.
+
+The remote repository is therefore consulted before every prompt without executing mutable remote code.
+
+## Why remote rules are not downloaded on every prompt
+
+Cursor's `beforeSubmitPrompt` hook can block/allow a prompt but does not inject arbitrary updated policy context. The installed Always Apply rules are the context source. Remote GitHub is the freshness authority.
+
+Automatically downloading and executing mutable policy/hook code on every prompt would also create a supply-chain risk.
+
+## Local plugin testing
+
+Place the contents of this repository's `plugin/` directory in:
 
 ```text
 ~/.cursor/plugins/local/quantahub-policy/
 ```
 
-That target directory must contain `.cursor-plugin/plugin.json`. Restart Cursor or reload the window, then verify the plugin in Customize.
+The target directory must contain:
 
-The policy guard requires a Python 3 interpreter available as `python`. Security-critical shell hooks use `failClosed: true`; if the guard cannot run, matching high-risk shell actions are blocked rather than silently allowed.
+```text
+.cursor-plugin/plugin.json
+rules/
+agents/
+hooks/
+```
+
+A Python 3 interpreter available as `python` is required by the command hooks.
+
+## Agent behavior
+
+The main Agent:
+1. receives every QuantaHub rule automatically,
+2. follows `DECISION_POLICY.md` instead of asking for equivalent technical choices,
+3. delegates to specialists automatically,
+4. requires security review for security-boundary changes,
+5. requires verifier evidence before meaningful completion.
 
 ## Project-local fallback
 
-If plugin installation is not desired:
-
-```text
-<project>/.cursor/rules/quantahub/   <- copy plugin/rules/*
-<project>/.cursor/agents/            <- copy plugin/agents/*
-```
-
-Hooks are not activated merely by copying rules/agents. Use the plugin form when hook enforcement is required.
-
-## Git submodule option
-
-Do not mount the whole ruleset repository directly as `.cursor/rules/quantahub`; the actual rule files live under `plugin/rules`.
-
-Instead:
-
-```text
-vendor/quantahubruleset/             <- Git submodule
-.cursor/rules/quantahub/             <- generated/synced copy of vendor/quantahubruleset/plugin/rules/
-.cursor/agents/                       <- generated/synced copy of vendor/quantahubruleset/plugin/agents/
-```
-
-Automate that sync in project bootstrap/CI if this fallback is used.
-
-## Context strategy
-
-Always-applied constitutional rules are intentionally small:
-- master governance,
-- CTFd boundaries,
-- control/lab trust boundary,
-- agent orchestration,
-- definition of done.
-
-Specialist rules are contextual and selected when their descriptions match the work.
-
-## Enforcement model
-
-Rules guide the model. Hooks add preventive guardrails for selected high-confidence dangerous shell operations. JSON Schema and CI provide machine validation. Runtime/application security controls remain authoritative and must not depend on agent compliance alone.
+Copying rules/agents to `.cursor/` can provide context, but it does not reproduce plugin hook enforcement. For QuantaHub development, the plugin form is required.
 
 ## Hard rule
 
-Never assume "the Agent read the GitHub repository" unless the policy plugin or project-local components are actually installed.
+Do not develop QuantaHub with a stale, unverifiable, selectively-loaded or partially-installed policy pack.
