@@ -1,23 +1,43 @@
 ---
-description: Definition of done and independent verification policy.
+description: Deterministic definition of done and verification matrix.
 alwaysApply: true
 ---
 # Verification Policy
 
-Never equate code generation with completion.
+Code generation is never completion.
 
-Choose tests appropriate to the change:
-- unit tests,
-- integration tests,
-- E2E tests,
-- API-contract tests,
-- lab lifecycle tests,
-- TTL/cleanup tests,
-- network-isolation tests,
-- authorization tests,
-- regression tests,
-- security checks.
+## Mandatory verification matrix
 
-For lab infrastructure, verify both the happy path and cleanup/failure path.
-For security boundaries, require negative tests proving prohibited access fails.
-Report unresolved risks instead of hiding them.
+Apply every matching row:
+
+| Change type | Required verification |
+| --- | --- |
+| Pure business/domain logic | unit tests |
+| Database/model/migration | unit + migration/integration test |
+| HTTP/API behavior | unit + integration + contract/schema checks |
+| Cross-service contract | contract + integration + compatibility check |
+| Frontend component | component/unit where available + accessibility/responsive checks |
+| User-visible workflow | E2E or equivalent end-to-end evidence |
+| Lab session lifecycle | start + health + stop/expire + deterministic cleanup |
+| Runner/runtime provider | lifecycle + resource limit + failure/recovery tests |
+| Network/security boundary | positive path + negative tests proving forbidden access fails |
+| Authorization/tenant change | positive role test + cross-role + cross-tenant negative tests |
+| Supply-chain/lab import | license metadata + pin/digest + schema + build/test/scan evidence |
+| Policy/ruleset change | policy CI + hook tests + version consistency |
+
+## Security order
+
+For security-sensitive changes:
+1. implementation owner finishes candidate change,
+2. quanta-security reviews,
+3. owner fixes findings,
+4. quanta-verifier independently verifies.
+
+## Completion output
+
+A task is complete only when evidence states:
+- what was tested,
+- what passed,
+- what remains unverified, if anything.
+
+If required verification cannot run, report BLOCKED rather than DONE.
