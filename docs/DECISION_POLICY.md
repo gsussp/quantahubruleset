@@ -40,10 +40,17 @@ Do not introduce a new framework, database, queue, service mesh, orchestration p
 
 ## Frontend defaults
 
-- Prefer CTFd theme/plugin extension and progressive enhancement before creating a separate SPA.
-- Reuse existing CSS/component conventions before adding a new design system.
+- Read `docs/ui/README.md` before any QuantaHub UI planning, implementation or review.
+- Prefer CTFd theme/plugin extension, Jinja and progressive enhancement before creating a separate SPA.
+- Reuse existing Vite/Bootstrap/Alpine-compatible patterns where they solve the problem cleanly.
+- Use semantic CSS design tokens instead of page-specific one-off values.
 - Do not bypass API boundaries or authorization for frontend convenience.
-- Accessibility and responsive behavior are part of definition of done.
+- Responsive behavior across desktop/laptop/tablet/mobile and accessibility are part of definition of done.
+- Where backend data is not yet available, prefer small explicit provider/adapter contracts over hard-coded mock state in templates.
+- For terminal rendering, evaluate xterm.js before hand-building terminal behavior.
+- Use CSS transitions for ordinary motion; use Web Animations API for moderate native sequencing.
+- GSAP is optional. Propose it only when complex coordinated timelines cannot be expressed cleanly with CSS/WAAPI, and only after verifying current license, maintenance and bundle impact.
+- Do not add a SPA framework, animation library, icon library or font package merely for novelty.
 
 ## API defaults
 
@@ -90,7 +97,7 @@ Before adding a dependency:
 2. verify maintenance activity and license,
 3. pin an appropriate compatible version/range,
 4. add tests,
-5. document any operational/security implications.
+5. document operational/security and bundle implications when relevant.
 
 For open-source labs, a public repository without a suitable license is not automatically approved.
 
@@ -110,6 +117,8 @@ Minimum verification is based on affected boundary:
 - persistence/API: unit + integration,
 - cross-service contract: contract + integration,
 - user flow: E2E where practical,
+- UI surface: responsive + accessibility + visual-state evidence,
+- motion: reduced-motion and interaction checks,
 - runtime/lab lifecycle: lifecycle + cleanup,
 - security boundary: negative tests proving forbidden behavior fails.
 
