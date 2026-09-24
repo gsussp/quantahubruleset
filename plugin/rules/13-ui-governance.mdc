@@ -1,0 +1,35 @@
+---
+description: Canonical QuantaHub UI/UX governance, visual identity and frontend architecture policy.
+alwaysApply: true
+---
+# UI Governance
+
+Every QuantaHub UI/UX task MUST begin by reading `docs/ui/README.md` and the documents it marks as canonical.
+
+## Product identity
+
+QuantaHub is a serious cybersecurity learning platform and professional cyber workspace. The product should feel technical, premium, calm, modular, responsive and interactive.
+
+Hack The Box and TryHackMe may be used only as product-reference inspiration. Never copy their layouts, brand colors, wording, illustrations, iconography or distinctive branded components.
+
+Avoid cyber clichés such as Matrix rain, skull imagery, excessive neon/glow, fake decorative terminals, random gradients, emoji as primary icons and cartoon-like gamification.
+
+## Frontend architecture
+
+- Preserve CTFd as the application chassis.
+- Prefer CTFd plugin/theme extension, Jinja, existing Vite/Bootstrap conventions, Alpine.js where appropriate, CSS custom properties and progressive enhancement.
+- Do not introduce a React/Vue/Next-style SPA merely for visual polish.
+- Add a new frontend dependency only when existing project capabilities cannot solve the problem cleanly; verify license, maintenance and bundle impact first.
+- Do not bypass platform APIs, authorization or lab/service boundaries for frontend convenience.
+
+## Responsive requirement
+
+Responsive behavior is a hard requirement. Every primary learner flow must work on wide desktop, laptop, tablet and mobile. Critical lab status/actions must never be desktop-only.
+
+## Simulation honesty
+
+M1.5 may use explicit mock providers/adapters for UI development. Simulated terminal, lab and recommendation behavior must be deterministic, clearly distinguishable from live runtime behavior and replaceable without rewriting the UI.
+
+## Accessibility
+
+WCAG AA-oriented contrast, keyboard navigation, visible focus, semantic structure, non-color-only status, reduced-motion support and accessible dynamic status announcements are part of completion, not later polish.
