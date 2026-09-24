@@ -3,13 +3,13 @@
   "owner": { "name": "QuantaHub" },
   "metadata": {
     "description": "QuantaHub deterministic Cursor policy and agent plugins",
-    "version": "0.3.0"
+    "version": "0.4.0"
   },
   "plugins": [
     {
       "name": "quantahub-policy",
       "source": "plugin",
-      "description": "QuantaHub deterministic architecture, security, orchestration and verification rules"
+      "description": "QuantaHub deterministic architecture, security, UI/UX, orchestration and verification rules"
     }
   ]
 }
