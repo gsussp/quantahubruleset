@@ -1,0 +1,60 @@
+---
+description: Lab Workspace, terminal, lifecycle, timer, focus and recovery UX policy.
+alwaysApply: true
+---
+# Lab Experience UI
+
+Lab Workspace is a first-class Quanta product surface.
+
+## Workspace
+
+Plan desktop/tablet/mobile behavior for:
+- objectives/instructions,
+- tasks/questions,
+- target/browser,
+- terminal,
+- notes,
+- lab status,
+- timer,
+- progress,
+- recovery actions.
+
+Wide desktop may use resizable or multi-pane layouts. Tablet/mobile must degrade to clear tabs or a prioritized single-pane flow without hiding critical status/actions.
+
+## Lifecycle language
+
+Map internal states to calm user-facing labels:
+
+- REQUESTED / QUEUED / SCHEDULING -> Preparing lab
+- PROVISIONING / STARTING / HEALTH_CHECK -> Starting environment
+- READY -> Lab Ready
+- STOPPING / CLEANING -> Stopping lab
+- TERMINATED -> Lab Stopped
+- EXPIRED -> Lab Expired
+- FAILED / LOST -> Environment unavailable
+
+Never leave stale READY UI when session/connectivity truth cannot be confirmed.
+
+## Terminal
+
+M1.5 terminal behavior is an explicit simulation, not a real shell.
+
+Use a `TerminalAdapter` contract:
+- `MockTerminalAdapter` for deterministic prototype behavior,
+- `GatewayTerminalAdapter` later for real lab connectivity.
+
+The mock may support selected commands such as `help`, `whoami`, `pwd`, `ls`, `cat`, `clear`, `ip`, `curl`, `nmap` and `history`. Output may use short realistic delays, history and colored terminal output, but must expose a subtle SIMULATED/DEMO indicator. Live runtime later uses an explicit LIVE state.
+
+## Provisioning and timer
+
+Provisioning UI may show meaningful staged progress and a short Quanta Pulse on READY. Do not claim backend actions that are not actually occurring.
+
+Timer warnings must use text/icon plus semantic color. Preserve future support for extension without inventing entitlement logic.
+
+## Recovery
+
+Explicitly design interrupted connection, stale status, expired session, failed environment and cleanup-in-progress. Learner-facing errors show concise explanation, next action and correlation/reference ID when available; never raw stack traces.
+
+## Focus Mode
+
+Room/Lab Focus Mode may reduce navigation chrome but must preserve current context, lab status, timer, terminal/target, critical actions and accessibility.
