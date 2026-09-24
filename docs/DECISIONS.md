@@ -62,10 +62,10 @@ Status: Accepted
 
 Commodity platform modules may start together. Lab Orchestrator remains separately deployable/permissioned because it operates across a different trust boundary.
 
-## D-013 — CTFd is not mandatory for every learning workflow
+## D-013 — CTFd is the application chassis; QuantaHub owns richer learning semantics
 Status: Accepted
 
-CTFd remains useful for CTF/competition/challenge flows while learning paths/rooms may use QuantaHub-native modules.
+CTFd remains the foundational application/platform chassis for identity, sessions, challenges, flags, teams, scoreboard, admin and extension points. QuantaHub-native learning semantics such as Paths, Modules, Rooms, progress and lab workspace do not need to be forced into CTFd challenge objects when a plugin-owned domain model is cleaner.
 
 ## D-014 — Ruleset repository is canonical agent memory
 Status: Accepted
@@ -100,7 +100,7 @@ Quotas, TTL, rate limits, suspension, default-deny egress, monitoring and emerge
 ## D-020 — All QuantaHub Cursor rules are Always Apply
 Status: Accepted
 
-Cursor does not decide which QuantaHub policy rule is relevant. All 13 rules are included on every Agent task.
+Cursor does not decide which QuantaHub policy rule is relevant. All QuantaHub rules are included on every Agent task.
 
 ## D-021 — Canonical GitHub policy freshness is checked before every prompt
 Status: Accepted
@@ -116,3 +116,38 @@ Equivalent technical choices are resolved by `docs/DECISION_POLICY.md`; the user
 Status: Accepted
 
 CI rejects governed repository changes when the canonical VERSION has not changed. This prevents remote freshness checks from missing changed policy content.
+
+## D-024 — Canonical Quanta UI system
+Status: Accepted
+
+`docs/ui/README.md` is the mandatory UI/UX entry point and `docs/ui/QUANTA_UI_SYSTEM.md` is the detailed design authority. UI work must also obey rules 13–17.
+
+## D-025 — External platforms are inspiration, not templates
+Status: Accepted
+
+Hack The Box and TryHackMe may inform broad qualities such as technical credibility, learning clarity and workspace ergonomics. QuantaHub must not copy their visual identity, page layouts, proprietary artwork, wording or distinctive branded components.
+
+## D-026 — Quanta is dark-first, technical and restrained
+Status: Accepted
+
+The visual language uses layered dark surfaces, controlled accent colors, outline technical iconography, disciplined spacing/radii and the Quanta Node/Grid/Pulse motifs. Cyber clichés, excessive neon, decorative fake terminals and spectacle-first motion are rejected.
+
+## D-027 — Preserve CTFd frontend conventions before introducing a new application framework
+Status: Accepted
+
+M1.5 extends CTFd through plugin/theme/Jinja/progressive-enhancement patterns. A separate SPA framework is not introduced solely for visual polish. New frontend dependencies require license, maintenance, bundle and necessity review.
+
+## D-028 — UI quality gates are mandatory
+Status: Accepted
+
+Meaningful UI changes require responsive viewport evidence, accessibility checks, relevant state coverage and visual QA. Backend/unit tests alone do not prove UI completion.
+
+## D-029 — Lab Workspace and terminal are first-class product surfaces
+Status: Accepted
+
+The Lab Workspace is designed as a responsive professional security workspace. Terminal rendering uses a replaceable adapter boundary; M1.5 may simulate deterministic commands but must distinguish SIMULATED/DEMO from future LIVE sessions.
+
+## D-030 — Milestone 1.5 is UI/UX Foundation + Interactive Product Prototype
+Status: Accepted
+
+After Milestone 1, M1.5 establishes design tokens, responsive shell, personalized dashboard, learning surfaces, Skill Graph prototype, Lab Workspace, terminal prototype, mock lifecycle/state harness, motion, recovery UX, accessibility and visual QA before Milestone 2 adds real runtime connectivity.
