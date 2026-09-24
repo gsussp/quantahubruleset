@@ -28,12 +28,18 @@ Invoke specialists automatically using these triggers:
 - Lab Gateway routing/resource profiles.
 
 ### quanta-frontend — REQUIRED when work touches
-- dashboard,
-- learning paths/rooms,
-- CTFd theme UI,
-- lab start/stop/reset controls,
+- dashboard or personalization,
+- learning paths/rooms/progress/Skill Graph,
+- CTFd theme/plugin UI,
+- responsive application shell/navigation,
+- lab workspace or lab controls,
 - terminal/web embedding,
-- responsive/accessibility behavior.
+- motion/animation,
+- design tokens/components/icons,
+- loading/empty/error/recovery states,
+- accessibility or visual QA.
+
+For every UI/UX task, the Master and quanta-frontend MUST read `docs/ui/README.md` before planning or implementation.
 
 ### quanta-security — REQUIRED review when work touches
 - authentication/authorization/tenant isolation,
@@ -42,6 +48,7 @@ Invoke specialists automatically using these triggers:
 - networking/DNS/ingress/egress,
 - browser origins/domains/cookies,
 - gateways,
+- terminal/live lab connectivity,
 - supply chain,
 - malware/high-risk labs,
 - abuse controls,
@@ -49,6 +56,8 @@ Invoke specialists automatically using these triggers:
 
 ### quanta-verifier — REQUIRED after every meaningful implementation
 Meaningful includes any behavior, contract, schema, migration, security, lab runtime, API, UI flow or infrastructure change.
+
+Meaningful UI work requires responsive/accessibility/visual evidence per rules 13–17.
 
 ## Multi-domain tasks
 
