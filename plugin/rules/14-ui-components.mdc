@@ -1,0 +1,40 @@
+---
+description: QuantaHub design tokens, component system, iconography, motion and frontend dependency rules.
+alwaysApply: true
+---
+# UI Components and Motion
+
+Use the canonical design system in `docs/ui/QUANTA_UI_SYSTEM.md`.
+
+## Design tokens
+
+Define and consume semantic tokens for backgrounds, surfaces, text, borders, accent, status colors, spacing, radius, elevation, typography, motion and z-index. Do not scatter one-off visual constants through page-specific CSS.
+
+Use an 8px-derived spacing rhythm and controlled radii. Quanta is dark-first but not pure-black or neon-first.
+
+## Icons and typography
+
+Use one consistent licensed SVG icon family. Outline-first, technical, geometric icons are preferred. Emoji are not primary UI icons.
+
+Use a highly readable sans-serif UI font and a dedicated monospaced terminal/code font. Verify font licensing before bundling.
+
+## Motion hierarchy
+
+Animation must communicate hierarchy, continuity, state, progress or feedback. Remove animation that exists only for spectacle.
+
+Default hierarchy:
+- simple hover/focus/opacity/transform -> CSS transitions,
+- moderate browser-native sequencing -> Web Animations API when appropriate,
+- complex coordinated timelines -> evaluate GSAP only when CSS/WAAPI are insufficient.
+
+GSAP is OPTIONAL, not a default dependency. If proposed, verify current license, maintenance, bundle impact and exact justified use before adding it.
+
+Honor `prefers-reduced-motion`.
+
+## Terminal rendering
+
+For a terminal surface, evaluate xterm.js before building a custom terminal renderer. Terminal behavior must sit behind a `TerminalAdapter` boundary so a mock implementation can later be replaced by a real gateway-backed implementation.
+
+## Reuse
+
+Prefer reusable Quanta primitives/composites for buttons, cards, status, progress, timer, toasts, skeletons, empty/error states, navigation, path/room cards, lab panels and terminal surfaces. Use implementation patterns natural to Jinja/Alpine/CTFd; do not imitate React component architecture unnecessarily.
