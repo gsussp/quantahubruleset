@@ -16,14 +16,19 @@ Apply every matching row:
 | Database/model/migration | unit + migration/integration test |
 | HTTP/API behavior | unit + integration + contract/schema checks |
 | Cross-service contract | contract + integration + compatibility check |
-| Frontend component | component/unit where available + accessibility/responsive checks |
+| Frontend component | component/unit where available + accessibility + responsive + visual-state checks |
+| Major UI surface | desktop/laptop/tablet/mobile evidence + loading/empty/error/state coverage + console check |
 | User-visible workflow | E2E or equivalent end-to-end evidence |
+| Motion/animation | reduced-motion + interaction-blocking + state-clarity checks |
+| Terminal UI/mock | deterministic command/state tests + keyboard/resize/accessibility checks |
 | Lab session lifecycle | start + health + stop/expire + deterministic cleanup |
 | Runner/runtime provider | lifecycle + resource limit + failure/recovery tests |
 | Network/security boundary | positive path + negative tests proving forbidden access fails |
 | Authorization/tenant change | positive role test + cross-role + cross-tenant negative tests |
 | Supply-chain/lab import | license metadata + pin/digest + schema + build/test/scan evidence |
 | Policy/ruleset change | policy CI + hook tests + version consistency |
+
+For UI work, `docs/ui/README.md` and rules 13–17 are mandatory verification inputs. Pytest alone is not sufficient evidence for meaningful visual changes.
 
 ## Security order
 
@@ -37,6 +42,7 @@ For security-sensitive changes:
 
 A task is complete only when evidence states:
 - what was tested,
+- viewport/state coverage where applicable,
 - what passed,
 - what remains unverified, if anything.
 
