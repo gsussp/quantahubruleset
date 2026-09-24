@@ -1,0 +1,60 @@
+---
+description: Mandatory responsive, accessibility, visual QA and UI completion gates.
+alwaysApply: true
+---
+# UI Quality Gates
+
+A UI change is not complete because templates render or pytest passes.
+
+Apply all matching gates.
+
+## Viewport evidence
+
+For meaningful UI work, verify representative states at:
+- wide desktop,
+- normal laptop/desktop,
+- tablet,
+- mobile.
+
+Lab Workspace and navigation must receive dedicated responsive verification.
+
+## State evidence
+
+Verify relevant:
+- loading,
+- empty,
+- populated,
+- disabled,
+- error,
+- disconnected/offline,
+- stale data,
+- lifecycle states,
+- keyboard focus,
+- reduced motion.
+
+## Visual evidence
+
+Capture screenshots or equivalent visual-regression evidence for major surfaces changed, including Dashboard, Learn/Path, Room and Lab Workspace when affected.
+
+Check for:
+- clipping/overflow,
+- unreadable contrast,
+- broken hierarchy,
+- inconsistent spacing/radius/icon weight,
+- layout shifts,
+- unusable mobile controls,
+- console errors.
+
+## Accessibility
+
+Verify semantic headings, keyboard navigation, visible focus, icon-button labels, non-color-only state, useful ARIA/status behavior and `prefers-reduced-motion`.
+
+## Motion
+
+Motion must remain responsive and must not block interaction. Reduced-motion mode must remove non-essential animation while retaining state clarity.
+
+## Completion
+
+Meaningful UI implementation requires quanta-frontend ownership and independent quanta-verifier evidence. Security-sensitive browser/lab-origin changes also require quanta-security review.
+
+Record deferred visual compromises in `docs/ui/UI_DEBT.md` when that ledger exists; do not hide design debt in ad-hoc CSS.
