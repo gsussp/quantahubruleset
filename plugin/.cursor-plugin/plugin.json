@@ -1,11 +1,11 @@
 {
   "name": "quantahub-policy",
-  "version": "0.3.0",
-  "description": "Deterministic QuantaHub architecture, security, orchestration and verification policy pack.",
+  "version": "0.4.0",
+  "description": "Deterministic QuantaHub architecture, security, orchestration, UI/UX and verification policy pack.",
   "author": { "name": "QuantaHub" },
   "repository": "https://github.com/gsussp/quantahubruleset",
   "license": "Apache-2.0",
-  "keywords": ["quantahub", "cyber-range", "ctfd", "security", "architecture", "agents", "deterministic"],
+  "keywords": ["quantahub", "cyber-range", "ctfd", "security", "architecture", "frontend", "ui", "ux", "agents", "deterministic"],
   "rules": "./rules/",
   "agents": "./agents/",
   "hooks": "./hooks/hooks.json"
