@@ -9,7 +9,7 @@ Cursor must work under QuantaHub policy continuously without requiring the user 
 Install the `plugin/` directory as the QuantaHub Cursor Plugin. The normal Cursor main Agent is the Master/Orchestrator.
 
 The plugin contains:
-- all 13 QuantaHub rules,
+- all 18 QuantaHub rules,
 - five specialist subagents,
 - session policy context,
 - per-prompt canonical GitHub freshness enforcement,
@@ -27,7 +27,7 @@ for every QuantaHub rule.
 
 Cursor does not decide which QuantaHub rule is relevant. All rules are available on every Agent task.
 
-This uses more context than selective rules by design; consistency is more important than context minimization for this project.
+For UI/UX tasks, `docs/ui/README.md` is additionally the mandatory entry point. The Master and `quanta-frontend` must read it before UI planning or implementation.
 
 ## Canonical GitHub freshness check
 
@@ -74,7 +74,7 @@ agents/
 hooks/
 ```
 
-A Python 3 interpreter available as `python` is required by the command hooks.
+The hook command must invoke a working local Python 3 interpreter. On Windows, if `python` is not on PATH, use a stable local launcher/interpreter configuration rather than weakening fail-closed behavior.
 
 ## Agent behavior
 
@@ -82,8 +82,20 @@ The main Agent:
 1. receives every QuantaHub rule automatically,
 2. follows `DECISION_POLICY.md` instead of asking for equivalent technical choices,
 3. delegates to specialists automatically,
-4. requires security review for security-boundary changes,
-5. requires verifier evidence before meaningful completion.
+4. routes all UI/UX work through `quanta-frontend` and canonical UI docs,
+5. requires security review for security-boundary changes,
+6. requires verifier evidence before meaningful completion.
+
+## Release/install ordering
+
+Because the installed plugin must exactly match canonical `main/VERSION`, policy release is operationally atomic:
+
+1. prepare and validate the new version on a branch,
+2. merge/release canonical main,
+3. immediately update the local installed plugin to the same version,
+4. verify local manifest/version and remote freshness before continuing product work.
+
+Do not intentionally leave canonical main and the active local plugin on different versions.
 
 ## Project-local fallback
 
