@@ -9,11 +9,12 @@ except Exception:
 
 print(json.dumps({
     "additional_context": (
-        "QuantaHub deterministic policy pack v0.3 is active. All QuantaHub rules are "
-        "Always Apply. The Cursor main Agent is Master/Orchestrator. Do not ask the "
-        "user to choose between equivalent technical approaches when DECISION_POLICY.md "
-        "provides a default. Use specialist agents automatically. Security-sensitive "
-        "changes require quanta-security review and meaningful implementation requires "
-        "quanta-verifier evidence."
+        "QuantaHub deterministic policy pack v0.4 is active. All 18 QuantaHub rules are "
+        "Always Apply. The Cursor main Agent is Master/Orchestrator. For every UI/UX task, "
+        "read docs/ui/README.md before planning or implementation and route through "
+        "quanta-frontend. Do not ask the user to choose between equivalent technical "
+        "approaches when DECISION_POLICY.md provides a default. Use specialist agents "
+        "automatically. Security-sensitive changes require quanta-security review and "
+        "meaningful implementation requires quanta-verifier evidence."
     )
 }))
