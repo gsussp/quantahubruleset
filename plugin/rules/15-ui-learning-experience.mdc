@@ -1,0 +1,45 @@
+---
+description: Personalized dashboard, learning path, room, progress and recommendation UX policy.
+alwaysApply: true
+---
+# Learning Experience UI
+
+## Dashboard purpose
+
+The learner dashboard must answer: **What should I do now?**
+
+Default priority:
+1. Continue Learning
+2. Active Lab
+3. Recommended Next
+4. Progress
+5. Skill Graph preview
+6. Weekly Activity
+7. Recent Activity
+8. Optional goal/achievement surfaces
+
+Do not reduce the dashboard to generic KPI cards.
+
+## Personalization
+
+Frontend personalization should consume an explicit provider/view-model contract. M1.5 may use `MockDashboardProvider`; future backend integration may replace it with `ApiDashboardProvider` without rewriting the dashboard.
+
+Potential signals include current path, last room, progress, active lab, recent activity, learning goal and bookmarks. Copy must remain supportive and non-guilt-inducing.
+
+## Recommendations
+
+Do not invent an AI recommendation engine. Until a dedicated backend exists, recommendation behavior is deterministic and explainable, such as current-path next room, unfinished room, next unlocked room or suitable starter content.
+
+## Learning hierarchy
+
+Path -> Module -> Room -> Lesson/Task -> Lab/Question/Flag remains the long-term model.
+
+Path UI should behave like a technical roadmap rather than a cartoon game map. Room UX should prioritize objectives, explanation, examples, action/lab, question/flag and completion feedback.
+
+## Progress and Skill Graph
+
+Show domain-specific progress where supported. The Quanta Skill Graph represents learning evidence/progress and prerequisite relationships; it must not imply psychometric expertise or professional certification that the product has not measured.
+
+## Empty/loading states
+
+New-user, empty, loading, disabled, permission/not-found and error states are first-class designs. Do not show meaningless empty KPI shells.
