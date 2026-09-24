@@ -1,8 +1,8 @@
 # QuantaHub Ruleset
 
-Canonical deterministic architecture, security, engineering, Cursor-agent orchestration and verification policy for the QuantaHub cyber-range platform.
+Canonical deterministic architecture, security, engineering, UI/UX, Cursor-agent orchestration and verification policy for the QuantaHub cyber-range platform.
 
-Current policy version: **0.3.0**
+Current policy version: **0.4.0**
 
 ## Deterministic Cursor mode
 
@@ -17,7 +17,7 @@ Remote GitHub VERSION check
     +-- stale/unreachable --> BLOCK
     |
     v
-13/13 rules Always Apply
+18/18 rules Always Apply
     |
     v
 Cursor Main Agent = Master/Orchestrator
@@ -29,7 +29,9 @@ Cursor Main Agent = Master/Orchestrator
     +--> quanta-verifier
 ```
 
-Cursor does not choose which QuantaHub rule to read. **Every rule is loaded for every Agent task.**
+Cursor does not choose which QuantaHub rule to read. Every rule is loaded for every Agent task.
+
+For any UI/UX task, `docs/ui/README.md` is the mandatory canonical entry point.
 
 `docs/DECISION_POLICY.md` defines deterministic technical defaults so the Agent does not ask the user to choose between equivalent implementation approaches.
 
@@ -50,6 +52,20 @@ Runner / Sandbox Plane
 
 Vulnerable lab execution is a separate trust domain and uses a separate registrable web domain from platform/authentication origins.
 
+## UI/UX policy
+
+QuantaHub v0.4 adds a canonical dark-first, responsive, accessible product system covering:
+- personalized Dashboard,
+- Learn / Path / Room,
+- Lab Workspace,
+- terminal adapter/simulation policy,
+- Quanta Node/Grid/Pulse visual language,
+- motion hierarchy,
+- responsive viewport rules,
+- visual QA and accessibility gates.
+
+GSAP is optional rather than a default dependency; normal motion should use CSS/WAAPI first. xterm.js is the preferred terminal-renderer candidate subject to dependency review.
+
 ## Machine enforcement
 
 - `VERSION` is the canonical policy version.
@@ -62,6 +78,8 @@ Vulnerable lab execution is a separate trust domain and uses a separate registra
 
 - `docs/DECISIONS.md`
 - `docs/DECISION_POLICY.md`
+- `docs/ui/README.md`
+- `docs/ui/QUANTA_UI_SYSTEM.md`
 - `docs/REMOTE_POLICY_SYNC.md`
 - `docs/SYSTEM_ARCHITECTURE.md`
 - `docs/SECURITY_MODEL.md`
