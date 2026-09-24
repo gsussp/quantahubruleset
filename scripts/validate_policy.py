@@ -69,6 +69,11 @@ expected_rules = {
     "10-verification.mdc",
     "11-git-change-management.mdc",
     "12-learning-product.mdc",
+    "13-ui-governance.mdc",
+    "14-ui-components.mdc",
+    "15-ui-learning-experience.mdc",
+    "16-ui-lab-experience.mdc",
+    "17-ui-quality-gates.mdc",
 }
 
 rules_dir = ROOT / "plugin" / "rules"
@@ -127,6 +132,13 @@ required_docs = [
 for name in required_docs:
     if not (ROOT / "docs" / name).exists():
         errors.append(f"missing required document: docs/{name}")
+
+for path in [
+    ROOT / "docs" / "ui" / "README.md",
+    ROOT / "docs" / "ui" / "QUANTA_UI_SYSTEM.md",
+]:
+    if not path.exists():
+        errors.append(f"missing required UI document: {path.relative_to(ROOT)}")
 
 for path in [
     ROOT / "plugin" / "hooks" / "policy-guard.py",
